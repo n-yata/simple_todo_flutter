@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/const/constants.dart';
 import 'package:todo_app/model/todo.dart';
 import 'package:todo_app/page/todo_edit_page.dart';
 import 'package:todo_app/shared/todo_list_item.dart';
@@ -29,9 +30,7 @@ class _TodoListPageState extends State<TodoListPage> {
           Expanded(
             child: _buildListView(),
           ),
-          Expanded(
-            child: _buildForm(),
-          ),
+          _buildForm(),
         ],
       ),
     );
@@ -54,7 +53,7 @@ class _TodoListPageState extends State<TodoListPage> {
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: const Text(
-              '削除',
+              TodoTexts.delete,
               textAlign: TextAlign.start,
               style: TextStyle(color: Colors.white),
             ),
@@ -81,27 +80,17 @@ class _TodoListPageState extends State<TodoListPage> {
   }
 
   /// 入力フォーム
-  Row _buildForm() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Flexible(
-          child: TextField(
-            controller: _controller,
-            onSubmitted: (value) => _decisionInput(),
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'タスク入力',
-            ),
-          ),
+  Container _buildForm() {
+    return Container(
+      padding: const EdgeInsets.all(10.0),
+      child: TextField(
+        controller: _controller,
+        onSubmitted: (value) => _decisionInput(),
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(),
+          hintText: TodoTexts.taskInput,
         ),
-        Flexible(
-          child: IconButton.outlined(
-            onPressed: () => _decisionInput(),
-            icon: const Icon(Icons.add),
-          ),
-        ),
-      ],
+      ),
     );
   }
 

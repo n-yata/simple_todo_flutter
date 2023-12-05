@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:todo_app/const/constants.dart';
 import 'package:todo_app/page/todo_list_page.dart';
 
 void main() {
@@ -12,9 +14,10 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Todoリスト',
+      title: TodoTexts.title,
       theme: ThemeData(
         primarySwatch: Colors.green,
+        textTheme: GoogleFonts.notoSansJpTextTheme(Theme.of(context).textTheme),
       ),
       home: const TodoListPage(),
     );

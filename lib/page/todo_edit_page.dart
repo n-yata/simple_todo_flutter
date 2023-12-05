@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/const/constants.dart';
 import 'package:todo_app/model/todo.dart';
 import 'package:todo_app/shared/todo_list_item.dart';
 
@@ -38,11 +39,15 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TextField(
-              controller: _titleController,
+            Expanded(
+              child: TextField(
+                controller: _titleController,
+              ),
             ),
-            TextField(
-              controller: _detailController,
+            Expanded(
+              child: TextField(
+                controller: _detailController,
+              ),
             ),
             const SizedBox(height: 8),
             SizedBox(
@@ -55,7 +60,7 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
                   Navigator.of(context).pop();
                 },
                 child: const Text(
-                  '更新',
+                  TodoTexts.update,
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -68,7 +73,7 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
                   Navigator.of(context).pop();
                 },
                 child: const Text(
-                  'キャンセル',
+                  TodoTexts.cancel,
                 ),
               ),
             ),
