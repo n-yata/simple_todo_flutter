@@ -20,3 +20,6 @@ samples, guidance on mobile development, and a full API reference.
 
 https://zenn.dev/enoiu/articles/596078e878145d
 
+### 画像アイコン
+
+https://icooon-mono.com/category/business/

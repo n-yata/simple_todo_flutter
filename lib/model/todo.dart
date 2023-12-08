@@ -1,5 +1,4 @@
-import 'package:flutter/cupertino.dart';
-
+/// TODOアイテムのモデルクラス
 class Todo {
   late int id;
   late String title;

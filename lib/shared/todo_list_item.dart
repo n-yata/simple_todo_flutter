@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/model/todo.dart';
 
+/// TODOリストを管理するシングルトンクラス
 class TodoItems {
   final String _saveKey = "Todo";
   List<Todo> _list = [];
@@ -15,21 +16,22 @@ class TodoItems {
     return _instance;
   }
 
+  /// TODOリストアイテムの件数を取得する
   int count() {
     return _list.length;
   }
 
-  /// Todoリストデータをロードする
+  /// TODOリストデータをロードする
   void loadItems() {
     _load();
   }
 
-  /// 指定したインデックスのTodoを取得する
+  /// 指定したインデックスのTODOを取得する
   Todo findByIndex(int index) {
     return _list[index];
   }
 
-  /// Todoを追加する
+  /// TODOを追加する
   void add(bool done, String title, String? detail) {
     var id = count() == 0 ? 1 : _list.last.id + 1;
     var dateTime = _getDateTime();
@@ -38,7 +40,7 @@ class TodoItems {
     _save();
   }
 
-  /// Todoを更新する
+  /// TODOを更新する
   void update(Todo todo, bool done, [String? title, String? detail]) {
     todo.done = done;
     if (title != null) {
@@ -51,7 +53,7 @@ class TodoItems {
     _save();
   }
 
-  /// Todoを削除する
+  /// TODOを削除する
   void delete(Todo todo) {
     _list.remove(todo);
     _save();
@@ -64,14 +66,14 @@ class TodoItems {
     return dateTime;
   }
 
-  /// Todoを保存する
+  /// TODOを保存する
   void _save() async {
     var prefs = await SharedPreferences.getInstance();
     var saveTargetList = _list.map((a) => json.encode(a.toJson())).toList();
     prefs.setStringList(_saveKey, saveTargetList);
   }
 
-  /// Todoを読み込む
+  /// TODOリストを読み込む
   void _load() async {
     var prefs = await SharedPreferences.getInstance();
     var loadTargetList = prefs.getStringList(_saveKey) ?? [];

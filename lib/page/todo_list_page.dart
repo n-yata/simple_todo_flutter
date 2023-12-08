@@ -4,6 +4,7 @@ import 'package:todo_app/model/todo.dart';
 import 'package:todo_app/page/todo_edit_page.dart';
 import 'package:todo_app/shared/todo_list_item.dart';
 
+/// TODO一覧表示ページ
 class TodoListPage extends StatefulWidget {
   const TodoListPage({super.key});
 
@@ -24,7 +25,9 @@ class _TodoListPageState extends State<TodoListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+      ),
       body: Column(
         children: [
           Expanded(
@@ -36,46 +39,51 @@ class _TodoListPageState extends State<TodoListPage> {
     );
   }
 
-  /// Todoリストビュー
+  /// TODOリストビュー
   ListView _buildListView() {
     return ListView.builder(
       itemCount: _items.count(),
       itemBuilder: (context, index) {
         var item = _items.findByIndex(index);
-        return Dismissible(
-          direction: DismissDirection.startToEnd,
-          key: Key(UniqueKey().toString()),
-          onDismissed: (DismissDirection direction) {
-            _items.delete(item);
-          },
-          background: Container(
-            color: Colors.red,
-            alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: const Text(
-              TodoTexts.delete,
-              textAlign: TextAlign.start,
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-          child: Container(
-            decoration: const BoxDecoration(
-                border: Border(
-              bottom: BorderSide(color: Colors.grey),
-            )),
-            child: ListTile(
-              title: Text(item.title),
-              trailing: Checkbox(
-                value: item.done,
-                onChanged: (bool? value) {
-                  setState(() => _items.update(item, value!));
-                },
-              ),
-              onTap: () => _pushTodoDetailPage(item),
-            ),
-          ),
-        );
+        return buildLitViewItem(item);
       },
+    );
+  }
+
+  // TODOリストビューアイテム
+  Dismissible buildLitViewItem(Todo item) {
+    return Dismissible(
+      direction: DismissDirection.startToEnd,
+      key: Key(UniqueKey().toString()),
+      onDismissed: (DismissDirection direction) {
+        _items.delete(item);
+      },
+      background: Container(
+        color: Colors.red,
+        alignment: Alignment.centerLeft,
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: const Text(
+          TodoTexts.delete,
+          textAlign: TextAlign.start,
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      child: Container(
+        decoration: const BoxDecoration(
+            border: Border(
+          bottom: BorderSide(color: Colors.grey),
+        )),
+        child: ListTile(
+          title: Text(item.title),
+          trailing: Checkbox(
+            value: item.done,
+            onChanged: (bool? value) {
+              setState(() => _items.update(item, value!));
+            },
+          ),
+          onTap: () => _pushTodoDetailPage(item),
+        ),
+      ),
     );
   }
 
@@ -94,6 +102,9 @@ class _TodoListPageState extends State<TodoListPage> {
     );
   }
 
+  /// 入力された値が空であるか判定する<br>
+  /// 空の場合：何もしない<br>
+  /// 空でない場合：TODOリストに値を追加する
   void _decisionInput() {
     if (_controller.text.isEmpty) {
       return;
