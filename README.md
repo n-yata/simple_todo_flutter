@@ -23,3 +23,8 @@ https://zenn.dev/enoiu/articles/596078e878145d
 ### 画像アイコン
 
 https://icooon-mono.com/category/business/
+
+### リリース参考
+
+https://gakogako.com/flutter_android_release/
+https://note.com/danchi_kun/n/n216824317df6

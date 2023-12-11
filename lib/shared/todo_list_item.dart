@@ -22,8 +22,8 @@ class TodoItems {
   }
 
   /// TODOリストデータをロードする
-  void loadItems() {
-    _load();
+  Future<void> loadItems() async {
+    await _load();
   }
 
   /// 指定したインデックスのTODOを取得する
@@ -74,7 +74,7 @@ class TodoItems {
   }
 
   /// TODOリストを読み込む
-  void _load() async {
+  Future<void> _load() async {
     var prefs = await SharedPreferences.getInstance();
     var loadTargetList = prefs.getStringList(_saveKey) ?? [];
     _list = loadTargetList.map((a) => Todo.fromJson(json.decode(a))).toList();

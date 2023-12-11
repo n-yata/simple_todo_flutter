@@ -1,6 +1,6 @@
-package com.example.todo_app
+package com.nyata.todo_app
 
 import io.flutter.embedding.android.FlutterActivity
 
-class MainActivity: FlutterActivity() {
+class MainActivity : FlutterActivity() {
 }

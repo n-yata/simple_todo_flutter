@@ -19,7 +19,6 @@ class _TodoListPageState extends State<TodoListPage> {
   @override
   void initState() {
     super.initState();
-    _loadItems();
   }
 
   @override
@@ -132,8 +131,7 @@ class _TodoListPageState extends State<TodoListPage> {
 
   /// TODOリストの更新を反映する
   void _loadItems() {
-    Future(() async {
-      setState(() => _items.loadItems());
-    });
+    _items.loadItems();
+    setState(() => {});
   }
 }
